@@ -1,0 +1,148 @@
+Exporting Data to CSV Format
+Right Click on table Task -> Export Data -> Data Source -> Flat File Destination -> File name CSV -> Query-> Next -> Finish
+
+UPPER() -> Convert colum to upper case
+LOWER() -> Convert Column to Lower Case
+GETDATE() -> Current Date and Time
+SUBSTRING(Column, start, end) -> get the substring from the data
+COUNT() -> count the number of records
+TRIM -> remove lead and trail spaces
+AVG() -> average of the column
+SUM() -> sum of column
+MAX()
+MIN()
+ROUND() -> round the number
+TRUNCATE() -> truncates the number
+DATE()
+MONTH()
+YEAR()
+NOW()
+SYSDATE()
+ROWNUMBER()
+
+
+#Head Function
+SELECT TOP 10 * from Customer
+
+#BETWEEN
+SELECT * FROM orders WHERE OrderDate between 'Date' AND 'Date'
+
+#AND
+SELECT * FROM orders WHERE year(OrderDate) = 1997 AND month(OrderDate) = 12
+
+#OR
+SELECT * FROM orders WHERE year(OrderDate) = 1997 OR month(OrderDate) = 12
+
+#IN
+SELECT * FROM orders WHERE OrderID IN (33,66,88)
+
+#selecting all columns in the table
+SELECT * FROM Categories
+
+#selecting columns from 2 table using JOIN
+SELECT Products.ProductID, Product.ProductName, Category.CategoryName, Product.Price
+FROM Product JOIN Categories
+ON Products.CategoryID = Categories.CategoryID
+
+#selecting columns from 2 table using INNER JOIN
+SELECT Products.ProductID, Product.ProductName, Category.CategoryName, Product.Price
+FROM Product INNER JOIN Categories
+ON Products.CategoryID = Categories.CategoryID
+
+#selecting columns from 2 table ordering by descending
+SELECT Products.ProductID, Product.ProductName, Category.CategoryName, Product.Price
+FROM Product INNER JOIN Categories
+ON Products.CategoryID = Categories.CategoryID
+ORDER BY CategoryName DESC
+
+#selecting columns from 2 table ordering by 2 columns descending
+SELECT Products.ProductID, Product.ProductName, Category.CategoryName, Product.Price
+FROM Product INNER JOIN Categories
+ON Products.CategoryID = Categories.CategoryID
+ORDER BY CategoryName, ProductName DESC
+
+#selecting columns from 2 table ordering by descending based on where clause
+SELECT Products.ProductID, Product.ProductName, Category.CategoryName, Product.Price
+FROM Product INNER JOIN Category
+ON Products.CategoryID = Category.CategoryID
+WHERE CategoryName = 'Beverages'
+ORDER BY CategoryName DESC
+
+#GROUPBY aggregation
+SELECT CompanyName, sum(Freight) 
+FROM Customers AS Cust JOIN Orders AS Ord
+ON Cust.CustomerID = Ord.CustomerID
+GROUP BY CompanyName
+ORDER BY CompanyName
+
+SELECT CompanyName, CategoryName, sum(Freight) 
+FROM Customers AS Cust JOIN Orders AS Ord
+ON Cust.CustomerID = Ord.CustomerID
+JOIN OrderDetails AS Ordd
+ON Ord.OrderID = Ordd.OrderID
+GROUP BY CompanyName, CategoryName
+ORDER BY CompanyName
+
+#HAVING - when we use aggregation use Having instead of WHERE
+SELECT CompanyName, CategoryName, sum(Freight) 
+FROM Customers AS Cust JOIN Orders AS Ord
+ON Cust.CustomerID = Ord.CustomerID
+JOIN OrderDetails AS Ordd
+ON Ord.OrderID = Ordd.OrderID
+GROUP BY CompanyName, CategoryName
+HAVING sum(Freight) > 500
+ORDER BY CompanyName
+
+----------------------------------------------------------------------------------------------------------------
+INNER JOIN -> All records with matching values are joined between the table
+FULL OUTER JOIN -> returns Records when there is a match record between the table
+LEFT JOIN -> All Records, columns from the left table is joined with the matched records on the right table
+RIGHT JOIN ->All Records, columns from the right table is joined with the matched records on the left table
+
+#JOIN Example - STEP1
+SELECT * FROM customers WHERE CustomerID = 'Blesson'
+SELECT * FROM orders WHERE OrderID = 10248
+SELECT * FROM orderdetails WHERE OrderID = 10248
+SELECT * FROM products WHERE ProductID = 11
+
+STEP2
+SELECT OrderId, CompanyName, OrderDate, Freight, Mobile, CustomerID
+FROM Orders AS ord JOIN Customer AS Cust
+ON Orders.CustomerID = Customer.CustomerID
+WHERE OrderID = 10248
+
+STEP3
+SELECT ord.OrderId, CompanyName, OrderDate, Freight, Mobile, Cust.CustomerID, ordd.ProductID
+FROM Orders AS ord AS JOIN Customer AS Cust
+ON Orders.CustomerID  = Customer.CustomerID
+JOIN orderdetails AS ordd
+ON ordd.OrderID = ord.OrderID
+WHERE ord.OrderID = 10248
+
+STEP4
+SELECT ord.OrderId, CompanyName, OrderDate, Freight, Mobile, Cust.CustomerID, ordd.ProductID, prod.ProductName
+FROM Orders AS ord AS JOIN Customer AS Cust
+ON Orders.CustomerID  = Customer.CustomerID
+JOIN orderdetails AS ordd
+ON ordd.OrderID = ord.OrderID
+JOIN products AS prod
+ON ordd.ProductID = ord.ProductID
+WHERE ord.OrderID = 10248
+--------------------------------------------------------------------------------------------------------------------
+
+#Using Alias
+SELECT OrderId, CompanyName, OrderDate, Freight, Mobile, CustomerID
+FROM Orders AS ord JOIN Customer AS Cust
+ON Orders.CustomerID = Customer.CustomerID 
+WHERE OrderID = 10248
+
+
+#UNION -> Joins all the data in the column together. Doesnt duplicate records 
+SELECT 'a', 'b'
+UNION
+SELECT 'c', 'd'
+
+#UNION ALL -> Joins all the data in the column together. Duplicate records 
+SELECT 'a', 'b'
+UNION ALL
+SELECT 'c', 'd'
