@@ -113,7 +113,7 @@ WHERE OrderID = 10248
 
 STEP3
 SELECT ord.OrderId, CompanyName, OrderDate, Freight, Mobile, Cust.CustomerID, ordd.ProductID
-FROM Orders AS ord AS JOIN Customer AS Cust
+FROM Orders AS ord JOIN Customer AS Cust
 ON Orders.CustomerID  = Customer.CustomerID
 JOIN orderdetails AS ordd
 ON ordd.OrderID = ord.OrderID
@@ -121,7 +121,7 @@ WHERE ord.OrderID = 10248
 
 STEP4
 SELECT ord.OrderId, CompanyName, OrderDate, Freight, Mobile, Cust.CustomerID, ordd.ProductID, prod.ProductName
-FROM Orders AS ord AS JOIN Customer AS Cust
+FROM Orders AS ord JOIN Customer AS Cust
 ON Orders.CustomerID  = Customer.CustomerID
 JOIN orderdetails AS ordd
 ON ordd.OrderID = ord.OrderID
