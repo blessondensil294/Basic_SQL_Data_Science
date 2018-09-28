@@ -167,3 +167,17 @@ SELECT 'c', 'd'
 SELECT 'a', 'b'
 UNION ALL
 SELECT 'c', 'd'
+----------------------------------------------------------------------------------------------------------------------
+WildCards
+% - ANY NO OF CHAR
+_ - ANY ONE CHAR
+
+SELECT * 
+FROM EMPLOYEE
+WHERE CLIENTNAME LIKE '%LLC';
+
+SELECT *
+FROM EMPLOYEE
+WHERE BIRTHDATE LIKE '____-08%';
+-----------------------------------------------------------------------------------------------------------------------------
+UNION
