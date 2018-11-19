@@ -119,6 +119,7 @@ INNER JOIN -> All records with matching values are joined between the table
 FULL OUTER JOIN -> returns Records when there is a match record between the table
 LEFT JOIN -> All Records, columns from the left table is joined with the matched records on the right table
 RIGHT JOIN ->All Records, columns from the right table is joined with the matched records on the left table
+CROSS JOIN -> Crossed all the records with the left and right join making all the varitions of the records.
 
 #JOIN Example - STEP1
 SELECT * FROM customers WHERE CustomerID = 'Blesson'
