@@ -115,10 +115,10 @@ HAVING sum(Freight) > 500
 ORDER BY CompanyName
 
 ----------------------------------------------------------------------------------------------------------------
-INNER JOIN -> All records with matching values are joined between the table
-FULL OUTER JOIN -> returns Records when there is a match record between the table
-LEFT JOIN -> All Records, columns from the left table is joined with the matched records on the right table
-RIGHT JOIN ->All Records, columns from the right table is joined with the matched records on the left table
+(INNER) JOIN -> All records with matching values are joined between the table
+FULL (OUTER) JOIN -> returns Records when there is a match record between the table
+LEFT (OUTER) JOIN -> All Records, columns from the left table is joined with the matched records on the right table
+RIGHT (OUTER) JOIN ->All Records, columns from the right table is joined with the matched records on the left table
 CROSS JOIN -> Crossed all the records with the left and right join making all the varitions of the records.
 
 #JOIN Example - STEP1
@@ -168,6 +168,12 @@ SELECT 'c', 'd'
 SELECT 'a', 'b'
 UNION ALL
 SELECT 'c', 'd'
+
+#INTERSECT -> joins the table in the column together only taking those records which are common in both the tables
+SELECT a, b
+INTERSECT
+SELECT b, c
+
 
 SELECT SALARY 
 FROM EMPLOYEE
